@@ -8,15 +8,18 @@ mcu?=RUNCONFIG
 GOODFET?=/dev/tty.usbser*
 
 #For tos-bsl, use --invert-reset --invert-test
-MSP430BSL?=goodfet.bsl --speed=38400
+MSP430BSL?=../client/goodfet.bsl
+#MSP430BSL?=goodfet.bsl --speed=38400
 JTAG=msp430-jtag
 
 
 GCCINC?=
 
 #All of these are ?= in order ot allow overriding.
-GCC?=msp430-gcc -mmcu=$(mcu)
-LDFLAGS?=-mmcu=$(mcu) #-Wl,-dT ldscripts/$(mcu).x
+GCC?=/opt/ti/mspgcc/bin/msp430-elf-gcc -mmcu=$(mcu) -I/opt/ti/mspgcc/include/
+#GCC?=msp430-elf-gcc -mmcu=$(mcu)
+LDFLAGS?= #-Wl,-dT ldscripts/$(mcu).x
+#LDFLAGS?=-mmcu=$(mcu) #-Wl,-dT ldscripts/$(mcu).x
 
 CCEXTRA ?=  $(CFLAGS) -D$(mcu) -D$(platform) -Dplatform=$(platform) -Dboard=$(board) $(GCCINC) -I include -I platforms
 CC =$(GCC) -Wall -O1 -fno-strict-aliasing -g   $(CCEXTRA)
@@ -377,7 +380,7 @@ $(app).hex: $(app)
 	avr-objcopy -j .text -j .data -O ihex goodfet goodfet.hex
 else
 $(app).hex: $(app)
-	msp430-objcopy goodfet -O ihex goodfet.hex
+	msp430-elf-objcopy goodfet -O ihex goodfet.hex
 endif
 m4s: $(app).hex
 	msp430-objdump -D -m msp430 $(app).hex | m4s init

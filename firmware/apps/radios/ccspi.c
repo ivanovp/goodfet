@@ -120,7 +120,7 @@ int ccspi_tx(u8 *data, int len) {
     return 0;
 #else
     debugstr("Can't TX a packet with SFD and FIFOP definitions.");
-    txdata(app,NOK,0);
+    txdata(apps,NOK,0);
     return 1;
 #endif
 }

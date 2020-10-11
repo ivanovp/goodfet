@@ -2,14 +2,28 @@
 
 // Included by other 2xx ports, such as the 2274.
 #include <msp430.h>
-#include <sys/crtld.h>
+//#include <sys/crtld.h>
 
 
 #include "platform.h"
 
 #include "dco_calib.h"
 
+void led_init()
+{
+}
 
+void led_on()
+{
+}
+
+void led_off()
+{
+}
+
+void led_toggle()
+{
+}
 
 //! Receive a byte.
 unsigned char serial0_rx(){

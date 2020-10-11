@@ -131,16 +131,16 @@ void avr_setlock(u8 bits){
 }
 
 //! Read a byte of EEPROM.
-u8 avr_peekeeprom(u16 adr){
+uint8_t avr_peekeeprom(uint16_t adr){
   return avrexchange(0xA0, adr>>8, adr&0xFF, 0);
 }
 //! Read a byte of EEPROM.
-u8 avr_pokeeeprom(u16 adr, u8 val){
+uint8_t avr_pokeeeprom(uint16_t adr, uint8_t val){
   return avrexchange(0xC0, adr>>8, adr&0xFF, val);
 }
 
 //! Read a byte of Flash
-u8 avr_peekflash(u16 adr){
+uint8_t avr_peekflash(uint16_t adr){
   u16 a=adr>>1;
   if(adr&1) //high byte
     return avrexchange(0x28,a>>8,a&0xff,0);
