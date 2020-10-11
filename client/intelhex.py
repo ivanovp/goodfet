@@ -799,7 +799,10 @@ class IntelHex16bit(IntelHex):
         if byte1 == None and byte2 == None:
             return self.padding
 
-        raise BadAccess16bit(address=addr16)
+        if byte1 != None:
+            return byte1     # low endian
+
+#        raise BadAccess16bit(address=addr16)
 
     def __setitem__(self, addr16, word):
         """Sets the address at addr16 to word assuming Little Endian mode.
